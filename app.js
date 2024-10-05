@@ -2,18 +2,29 @@ const express = require("express");
 const puppeteer = require('puppeteer');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 4000;
 
 app.get("/", async (req, res) => {
-  
-  const browser = await puppeteer.launch();
+
+  browser = await puppeteer.launch({
+    headless: true,
+    ignoreDefaultArgs: ["--disable-extensions"],
+    args: [
+      "--no-sandbox",
+      "--use-gl=egl",
+      "--disable-setuid-sandbox",
+    ],
+    ignoreHTTPSErrors: true,
+  });
+
   const page = await browser.newPage();
+  await page.setUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36")
   await page.goto('https://www.freecodecamp.org/');
 
   const result = page.html;
   await browser.close();
 
-  return res.type('html').send('result');
+  return res.send('hello');
 });
 
 const server = app.listen(port, () => console.log(`Listening on port ${port}!`));
