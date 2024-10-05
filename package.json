@@ -1,0 +1,17 @@
+{
+  "name": "marionette",
+  "version": "1.0.0",
+  "description": "Marionette on Render",
+  "main": "app.js",
+  "repository": "https://github.com/KimihikoAkayasaki/marionette",
+  "author": "",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "puppeteer": "^23.5.0"
+  }
+}
